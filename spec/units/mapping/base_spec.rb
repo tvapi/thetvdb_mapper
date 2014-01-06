@@ -1,7 +1,4 @@
 class MappingExample < ThetvdbMapper::Mapping::Base
-  def convert
-    {}
-  end
 end
 
 describe ThetvdbMapper::Mapping::Banner do
@@ -17,6 +14,7 @@ describe ThetvdbMapper::Mapping::Banner do
     end
 
     it 'should call convert method if exists' do
+      klass.stub(:respond_to?).with(:convert).and_return(true)
       klass.should_receive(:convert)
       klass.map(sample: 'test')
     end
