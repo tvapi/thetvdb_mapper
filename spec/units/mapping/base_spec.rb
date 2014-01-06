@@ -1,5 +1,7 @@
 class MappingExample < ThetvdbMapper::Mapping::Base
-
+  def convert
+    {}
+  end
 end
 
 describe ThetvdbMapper::Mapping::Banner do
@@ -12,6 +14,11 @@ describe ThetvdbMapper::Mapping::Banner do
 
     it 'should convert hash' do
       klass.map(sample: 'test').should == { example: 'test' }
+    end
+
+    it 'should call convert method if exists' do
+      klass.should_receive(:convert)
+      klass.map(sample: 'test')
     end
   end
 end
