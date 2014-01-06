@@ -1,27 +1,22 @@
 class ThetvdbMapper::Fetcher
-  def initialize(series_id, options = {})
-    @series_id = series_id
+  def series(id)
+    @series ||= client.series.find(id, mapping: true)
   end
 
-  def series
-    @series ||= client.series.find(@series_id, mapping: true)
+  def full_series(id)
+    @full_series ||= client.series.find_full(id, mapping: true)
   end
 
-  def full_series
-    @full_series ||= client.series.find_full(@series_id, mapping: true)
+  def actors(id)
+    @actors ||= client.actor.find(id, mapping: true)
   end
 
-  def actors
-    @actors ||= client.actor.all(@series_id, mapping: true)
+  def banners(id)
+    @banners ||= client.banner.find(id, mapping: true)
   end
 
-  def banners
-    @banners ||= client.banner.all(@series_id, mapping: true)
-  end
-
-  def episode(season, episode)
-    @episode ||= {}
-    @episode["#{season}x#{episode}"] ||= client.episode.find_by_default_order(@series_id, season, episode, mapping: true)
+  def episode(id)
+    @episode ||= client.episode.find(id, mapping: true)
   end
 
   def client
