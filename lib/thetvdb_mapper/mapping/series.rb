@@ -31,6 +31,6 @@ class ThetvdbMapper::Mapping::Series < ThetvdbMapper::Mapping::Base
     data.merge({
       genres: convert_to_list(data[:genres]),
       last_updated_at: Time.at(data[:last_updated_at].to_i)
-    }).reject{ |key, _| key.is_a?(String) }
+    })
   end
 end

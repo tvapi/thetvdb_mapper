@@ -8,7 +8,7 @@ class ThetvdbMapper::Mapping::Base
       data = convert(data)
     end
 
-    data
+    data.reject{ |key, _| key.is_a?(String) }
   end
 
   def self.convert_to_list(data)

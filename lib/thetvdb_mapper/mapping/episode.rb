@@ -40,6 +40,6 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
       guest_stars: convert_to_list(data[:guest_stars]),
       writer: convert_to_list(data[:writer]),
       last_updated_at: Time.at(data[:last_updated_at].to_i)
-    }).reject{ |key, _| key.is_a?(String) }
+    })
   end
 end
