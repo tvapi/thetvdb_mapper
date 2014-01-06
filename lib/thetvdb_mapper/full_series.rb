@@ -8,7 +8,7 @@ class ThetvdbMapper::FullSeries < ThetvdbMapper::Base
   end
 
   def episodes
-    fetcher.full_series.body['Episode'].map { |episode| map_episode(episode) }
+    fetcher.full_series(id).body['Episode'].map { |episode| map_episode(episode) }
   end
 
   def map_episode(data)
