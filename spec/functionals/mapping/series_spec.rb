@@ -30,8 +30,8 @@ describe ThetvdbMapper::Mapping::Series do
       klass.map('FirstAired' => '1997-07-01')[:first_aired].should == '1997-07-01'
     end
 
-    it 'should map genre' do
-      klass.map('genre' => '|comedy|')[:genres].should == ['comedy']
+    it 'should map Genre' do
+      klass.map('Genre' => '|comedy|')[:genres].should == ['comedy']
     end
 
     it 'should map IMDB_ID' do
@@ -78,8 +78,8 @@ describe ThetvdbMapper::Mapping::Series do
       klass.map('added' => '1')[:added_at].should == '1'
     end
 
-    it 'should map added_by' do
-      klass.map('added_by' => '1')[:added_by].should == '1'
+    it 'should map addedBy' do
+      klass.map('addedBy' => '1')[:added_by].should == '1'
     end
 
     it 'should map banner' do

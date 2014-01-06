@@ -6,7 +6,7 @@ class ThetvdbMapper::Mapping::Series < ThetvdbMapper::Mapping::Base
       'Airs_Time' => :airs_time,
       'ContentRating' => :content_rating,
       'FirstAired' => :first_aired,
-      'genre' => :genres,
+      'Genre' => :genres,
       'IMDB_ID' => :imdb_id,
       'Language' => :language,
       'Network' => :network,
@@ -18,7 +18,7 @@ class ThetvdbMapper::Mapping::Series < ThetvdbMapper::Mapping::Base
       'SeriesName' => :name,
       'Status' => :status,
       'added' => :added_at,
-      'added_by' => :added_by,
+      'addedBy' => :added_by,
       'banner' => :banner_path,
       'fanart' => :fanart_path,
       'lastupdated' => :last_updated_at,
@@ -31,6 +31,6 @@ class ThetvdbMapper::Mapping::Series < ThetvdbMapper::Mapping::Base
     data.merge({
       genres: convert_to_list(data[:genres]),
       last_updated_at: Time.at(data[:last_updated_at].to_i)
-    })
+    }).reject{ |key, _| key.is_a?(String) }
   end
 end

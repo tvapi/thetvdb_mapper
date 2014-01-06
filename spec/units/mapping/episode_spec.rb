@@ -104,12 +104,12 @@ describe ThetvdbMapper::Mapping::Episode do
       klass.rules['lastupdated'].should == :last_updated_at
     end
 
-    it 'should map season_id' do
-      klass.rules['season_id'].should == :season_id
+    it 'should map seasonid' do
+      klass.rules['seasonid'].should == :season_id
     end
 
-    it 'should map series_id' do
-      klass.rules['series_id'].should == :series_id
+    it 'should map seriesid' do
+      klass.rules['seriesid'].should == :series_id
     end
 
     it 'should map thumb_added' do
@@ -120,8 +120,8 @@ describe ThetvdbMapper::Mapping::Episode do
       klass.rules['thumb_height'].should == :thumbnail_height
     end
 
-    it 'should map thumb_weight' do
-      klass.rules['thumb_weight'].should == :thumbnail_width
+    it 'should map thumb_width' do
+      klass.rules['thumb_width'].should == :thumbnail_width
     end
   end
 

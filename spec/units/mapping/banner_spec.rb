@@ -4,6 +4,9 @@ describe ThetvdbMapper::Mapping::Banner do
   let(:klass) { ThetvdbMapper::Mapping::Banner }
 
   describe '#rules' do
+    it 'should map id' do
+      klass.rules['id'].should == :id
+    end
     it 'should map BannerPath' do
       klass.rules['BannerPath'].should == :path
     end

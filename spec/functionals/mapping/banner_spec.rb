@@ -6,7 +6,11 @@ describe ThetvdbMapper::Mapping::Banner do
   describe '#map' do
     it 'should return specific keys' do
       klass.map({}).keys.sort.should == [:path, :thumbnail_path, :vignette_path, :type, :type2, :language, :season,
-                                         :rating, :rating_count, :series_name, :colors].sort
+        :rating, :rating_count, :series_name, :colors, :id].sort
+    end
+
+    it 'should map id' do
+      klass.map('id' => '1')[:id].should == '1'
     end
 
     it 'should map BannerPath' do

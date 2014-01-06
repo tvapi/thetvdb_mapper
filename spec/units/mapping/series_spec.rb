@@ -24,8 +24,8 @@ describe ThetvdbMapper::Mapping::Series do
       klass.rules['FirstAired'].should == :first_aired
     end
 
-    it 'should map genre' do
-      klass.rules['genre'].should == :genres
+    it 'should map Genre' do
+      klass.rules['Genre'].should == :genres
     end
 
     it 'should map IMDB_ID' do
@@ -72,8 +72,8 @@ describe ThetvdbMapper::Mapping::Series do
       klass.rules['added'].should == :added_at
     end
 
-    it 'should map added_by' do
-      klass.rules['added_by'].should == :added_by
+    it 'should map addedBy' do
+      klass.rules['addedBy'].should == :added_by
     end
 
     it 'should map banner' do

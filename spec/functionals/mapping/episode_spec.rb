@@ -112,12 +112,12 @@ describe ThetvdbMapper::Mapping::Episode do
       klass.map('lastupdated' => '1234')[:last_updated_at].should == Time.at(1234)
     end
 
-    it 'should map season_id' do
-      klass.map('season_id' => '1')[:season_id].should == '1'
+    it 'should map seasonid' do
+      klass.map('seasonid' => '1')[:season_id].should == '1'
     end
 
-    it 'should map series_id' do
-      klass.map('series_id' => '1')[:series_id].should == '1'
+    it 'should map seriesid' do
+      klass.map('seriesid' => '1')[:series_id].should == '1'
     end
 
     it 'should map thumb_added' do
@@ -128,8 +128,8 @@ describe ThetvdbMapper::Mapping::Episode do
       klass.map('thumb_height' => 'test')[:thumbnail_height].should == 'test'
     end
 
-    it 'should map thumb_weight' do
-      klass.map('thumb_weight' => 'test')[:thumbnail_width].should == 'test'
+    it 'should map thumb_width' do
+      klass.map('thumb_width' => 'test')[:thumbnail_width].should == 'test'
     end
   end
 end

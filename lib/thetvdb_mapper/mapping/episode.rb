@@ -26,11 +26,11 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
       'airsbefore_season' => :airs_before_season,
       'filename' => :filename_path,
       'lastupdated' => :last_updated_at,
-      'season_id' => :season_id,
-      'series_id' => :series_id,
+      'seasonid' => :season_id,
+      'seriesid' => :series_id,
       'thumb_added' => :thumbnail_added_at,
       'thumb_height' => :thumbnail_height,
-      'thumb_weight' => :thumbnail_width
+      'thumb_width' => :thumbnail_width
     }
   end
 
@@ -40,6 +40,6 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
       guest_stars: convert_to_list(data[:guest_stars]),
       writer: convert_to_list(data[:writer]),
       last_updated_at: Time.at(data[:last_updated_at].to_i)
-    })
+    }).reject{ |key, _| key.is_a?(String) }
   end
 end
