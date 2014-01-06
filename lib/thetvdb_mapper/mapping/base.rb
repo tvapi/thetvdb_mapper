@@ -10,4 +10,8 @@ class ThetvdbMapper::Mapping::Base
 
     data
   end
+
+  def self.convert_to_list(data)
+    ThetvdbMapper::Mapping::StringList.map(data)
+  end
 end

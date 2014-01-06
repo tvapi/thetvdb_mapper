@@ -138,11 +138,4 @@ describe ThetvdbMapper::Mapping::Episode do
       klass.convert(input).should == output
     end
   end
-
-  describe '#convert_to_list' do
-    it 'should return correct hash' do
-      ThetvdbMapper::Mapping::StringList.should_receive(:map).with('test')
-      klass.convert_to_list('test')
-    end
-  end
 end

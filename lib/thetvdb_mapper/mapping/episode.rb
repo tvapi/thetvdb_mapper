@@ -42,8 +42,4 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
       last_updated_at: Time.at(data[:last_updated_at].to_i)
     })
   end
-
-  def self.convert_to_list(data)
-    ThetvdbMapper::Mapping::StringList.map(data)
-  end
 end

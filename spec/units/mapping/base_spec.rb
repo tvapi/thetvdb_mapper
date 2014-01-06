@@ -19,4 +19,11 @@ describe ThetvdbMapper::Mapping::Banner do
       klass.map(sample: 'test')
     end
   end
+
+  describe '#convert_to_list' do
+    it 'should return correct hash' do
+      ThetvdbMapper::Mapping::StringList.should_receive(:map).with('test')
+      klass.convert_to_list('test')
+    end
+  end
 end

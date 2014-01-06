@@ -1,29 +1,36 @@
 class ThetvdbMapper::Mapping::Series
-  def self.map(data)
+  def self.rules
     {
-      id: data['id'],
-      airs_day_of_week: data['Airs_DayOfWeek'],
-      airs_time: data['Airs_Time'],
-      content_rating: data['ContentRating'],
-      first_aired: data['FirstAired'],
-      genres: ThetvdbMapper::Mapping::StringList.map(data['genre']),
-      imdb_id: data['IMDB_ID'],
-      language: data['Language'],
-      network: data['Network'],
-      network_id: data['NetworkID'],
-      overview: data['Overview'],
-      rating: data['Rating'],
-      rating_count: data['RatingCount'],
-      runtime: data['Runtime'],
-      name: data['SeriesName'],
-      status: data['Status'],
-      added_at: data['added'],
-      added_by: data['added_by'],
-      banner_path: data['banner'],
-      fanart_path: data['fanart'],
-      last_updated_at: Time.at(data['lastupdated'].to_i),
-      poster_path: data['poster'],
-      zap2it_id: data['zap2it_id']
+      'id' => :id,
+      'Airs_DayOfWeek' => :airs_day_of_week,
+      'Airs_Time' => :airs_time,
+      'ContentRating' => :content_rating,
+      'FirstAired' => :first_aired,
+      'genre' => :genres,
+      'IMDB_ID' => :imdb_id,
+      'Language' => :language,
+      'Network' => :network,
+      'NetworkID' => :network_id,
+      'Overview' => :overview,
+      'Rating' => :rating,
+      'RatingCount' => :rating_count,
+      'Runtime' => :runtime,
+      'SeriesName' => :name,
+      'Status' => :status,
+      'added' => :added_at,
+      'added_by' => :added_by,
+      'banner' => :banner_path,
+      'fanart' => :fanart_path,
+      'lastupdated' => :last_updated_at,
+      'poster' => :poster_path,
+      'zap2it_id' => :zap2it_id
     }
+  end
+
+  def self.convert(data)
+    data.merge({
+      genres: convert_to_list(data[:genres]),
+      last_updated_at: Time.at(data[:last_updated_at].to_i)
+    })
   end
 end

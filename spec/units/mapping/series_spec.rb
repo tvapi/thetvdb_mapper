@@ -3,103 +3,111 @@ require 'spec_helper'
 describe ThetvdbMapper::Mapping::Series do
   let(:klass) { ThetvdbMapper::Mapping::Series }
 
-  describe '#map' do
-    it 'should return specific keys' do
-      klass.map({}).keys.sort.should == [:id, :airs_day_of_week, :airs_time, :content_rating, :first_aired, :genres,
-        :imdb_id, :language, :network, :network_id, :overview, :rating, :rating_count, :runtime, :name, :status,
-        :added_at, :added_by, :banner_path, :fanart_path, :last_updated_at, :poster_path, :zap2it_id].sort
-    end
-
+  describe '#rules' do
     it 'should map id' do
-      klass.map('id' => 1234)[:id].should == 1234
+      klass.rules['id'].should == :id
     end
 
     it 'should map Airs_DayOfWeek' do
-      klass.map('Airs_DayOfWeek' => 'Monday')[:airs_day_of_week].should == 'Monday'
+      klass.rules['Airs_DayOfWeek'].should == :airs_day_of_week
     end
 
     it 'should map Airs_Time' do
-      klass.map('Airs_Time' => '8:00 AM')[:airs_time].should == '8:00 AM'
+      klass.rules['Airs_Time'].should == :airs_time
     end
 
     it 'should map ContentRating' do
-      klass.map('ContentRating' => 'TV-PG')[:content_rating].should == 'TV-PG'
+      klass.rules['ContentRating'].should == :content_rating
     end
 
     it 'should map FirstAired' do
-      klass.map('FirstAired' => '1997-07-01')[:first_aired].should == '1997-07-01'
+      klass.rules['FirstAired'].should == :first_aired
     end
 
     it 'should map genre' do
-      klass.map('genre' => '|comedy|')[:genres].should == ['comedy']
+      klass.rules['genre'].should == :genres
     end
 
     it 'should map IMDB_ID' do
-      klass.map('IMDB_ID' => 'tt0118480')[:imdb_id].should == 'tt0118480'
+      klass.rules['IMDB_ID'].should == :imdb_id
     end
 
     it 'should map Language' do
-      klass.map('Language' => 'en')[:language].should == 'en'
+      klass.rules['Language'].should == :language
     end
 
     it 'should map Network' do
-      klass.map('Network' => 'SciFi')[:network].should == 'SciFi'
+      klass.rules['Network'].should == :network
     end
 
     it 'should map NetworkID' do
-      klass.map('NetworkID' => '1')[:network_id].should == '1'
+      klass.rules['NetworkID'].should == :network_id
     end
 
     it 'should map Overview' do
-      klass.map('Overview' => 'example overview')[:overview].should == 'example overview'
+      klass.rules['Overview'].should == :overview
     end
 
     it 'should map Rating' do
-      klass.map('Rating' => '1.0')[:rating].should == '1.0'
+      klass.rules['Rating'].should == :rating
     end
 
     it 'should map RatingCount' do
-      klass.map('RatingCount' => '1')[:rating_count].should == '1'
+      klass.rules['RatingCount'].should == :rating_count
     end
 
     it 'should map Runtime' do
-      klass.map('Runtime' => '45')[:runtime].should == '45'
+      klass.rules['Runtime'].should == :runtime
     end
 
     it 'should map SeriesName' do
-      klass.map('SeriesName' => 'Stargate SG-1')[:name].should == 'Stargate SG-1'
+      klass.rules['SeriesName'].should == :name
     end
 
     it 'should map Status' do
-      klass.map('Status' => 'Ended')[:status].should == 'Ended'
+      klass.rules['Status'].should == :status
     end
 
     it 'should map added' do
-      klass.map('added' => '1')[:added_at].should == '1'
+      klass.rules['added'].should == :added_at
     end
 
     it 'should map added_by' do
-      klass.map('added_by' => '1')[:added_by].should == '1'
+      klass.rules['added_by'].should == :added_by
     end
 
     it 'should map banner' do
-      klass.map('banner' => 'PATH')[:banner_path].should == 'PATH'
+      klass.rules['banner'].should == :banner_path
     end
 
     it 'should map fanart' do
-      klass.map('fanart' => 'PATH')[:fanart_path].should == 'PATH'
+      klass.rules['fanart'].should == :fanart_path
     end
 
     it 'should map lastupdated' do
-      klass.map('lastupdated' => '1234')[:last_updated_at].should == Time.at(1234)
+      klass.rules['lastupdated'].should == :last_updated_at
     end
 
     it 'should map poster' do
-      klass.map('poster' => 'PATH')[:poster_path].should == 'PATH'
+      klass.rules['poster'].should == :poster_path
     end
 
     it 'should map zap2it_id' do
-      klass.map('zap2it_id' => '1234')[:zap2it_id].should == '1234'
+      klass.rules['zap2it_id'].should == :zap2it_id
+    end
+  end
+
+  describe '#convert' do
+    let(:input) { { genres: true, last_updated_at: 1} }
+    let(:output) { { genres: 'LIST', last_updated_at: 'TIME'} }
+
+    before do
+      klass.stub(:convert_to_list).and_return('LIST')
+      Time.stub(:at).and_return('TIME')
+    end
+
+    it 'should return correct hash' do
+      klass.convert(input).should == output
     end
   end
 end
