@@ -4,6 +4,10 @@ class ThetvdbMapper::Mapping::Base
       data[after] = data.delete(before)
     end
 
+    if respond_to?(:convert)
+      data = convert(data)
+    end
+
     data
   end
 end
