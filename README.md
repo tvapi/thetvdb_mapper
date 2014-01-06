@@ -2,10 +2,11 @@
 [![Dependency Status](https://gemnasium.com/wafcio/thetvdb_mapper.png)](https://gemnasium.com/wafcio/thetvdb_mapper)
 [![Code Climate](https://codeclimate.com/github/wafcio/thetvdb_mapper.png)](https://codeclimate.com/github/wafcio/thetvdb_mapper)
 [![Coverage Status](https://coveralls.io/repos/wafcio/thetvdb_mapper/badge.png)](https://coveralls.io/r/wafcio/thetvdb_mapper)
+[![Gem Version](https://badge.fury.io/rb/thetvdb_mapper.png)](http://badge.fury.io/rb/thetvdb_mapper)
 
 # ThetvdbMapper
 
-TODO: Write a gem description
+Fetch data from thetvdb.com and mapping to common hash, where keys are symbols and underline.
 
 ## Installation
 
@@ -23,7 +24,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+ThetvdbMapper::Actor.new(series_id).data # return actors
+ThetvdbMapper::Banners.new(series_id).data # return banners hash (not image)
+ThetvdbMapper::Episode.new(episode_id).data # return episode
+ThetvdbMapper::FullSeries.new(series_id).data # return series with all episodes
+ThetvdbMapper::Series.new(series_id).data # return series
+```
 
 ## Contributing
 
