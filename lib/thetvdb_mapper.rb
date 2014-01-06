@@ -4,6 +4,7 @@ end
 
 require 'thetvdb_mapper/version'
 require 'thetvdb_mapper/fetcher'
+require 'thetvdb_mapper/mapping/base'
 require 'thetvdb_mapper/mapping/actor'
 require 'thetvdb_mapper/mapping/banner'
 require 'thetvdb_mapper/mapping/episode'

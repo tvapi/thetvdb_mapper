@@ -1,17 +1,17 @@
-class ThetvdbMapper::Mapping::Banner
-  def self.map(data)
+class ThetvdbMapper::Mapping::Banner < ThetvdbMapper::Mapping::Base
+  def self.rules
     {
-      path: data['BannerPath'],
-      thumbnail_path: data['ThumbnailPath'],
-      vignette_path: data['VignettePath'],
-      type: data['BannerType'],
-      type2: data['BannerType2'],
-      language: data['Language'],
-      season: data['Season'],
-      rating: data['Rating'],
-      rating_count: data['RatingCount'],
-      series_name: data['SeriesName'],
-      colors: data['Colors']
+      'BannerPath' => :path,
+      'ThumbnailPath' => :thumbnail_path,
+      'VignettePath' => :vignette_path,
+      'BannerType' => :type,
+      'BannerType2' => :type2,
+      'Language' => :language,
+      'Season' => :season,
+      'Rating' => :rating,
+      'RatingCount' => :rating_count,
+      'SeriesName' => :series_name,
+      'Colors' => :colors,
     }
   end
 end

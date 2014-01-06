@@ -1,12 +1,4 @@
-class ThetvdbMapper::Mapping::Actor
-  def self.map(data)
-    rules.each do |before, after|
-      data[after] = data.delete(before)
-    end
-
-    data
-  end
-
+class ThetvdbMapper::Mapping::Actor < ThetvdbMapper::Mapping::Base
   def self.rules
     {
       'id' => :id,

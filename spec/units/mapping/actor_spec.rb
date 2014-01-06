@@ -3,16 +3,6 @@ require 'spec_helper'
 describe ThetvdbMapper::Mapping::Actor do
   let(:klass) { ThetvdbMapper::Mapping::Actor }
 
-  describe '#map' do
-    before do
-      klass.stub(:rules).and_return(sample: :example)
-    end
-
-    it 'should convert hash' do
-      klass.map(sample: 'test').should == { example: 'test' }
-    end
-  end
-
   describe '#rules' do
     it 'should map id' do
       klass.rules['id'].should == :id
