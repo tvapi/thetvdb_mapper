@@ -1,4 +1,4 @@
-class ThetvdbMapper::Mapping::Series
+class ThetvdbMapper::Mapping::Series < ThetvdbMapper::Mapping::Base
   def self.rules
     {
       'id' => :id,
