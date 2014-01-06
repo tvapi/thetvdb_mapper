@@ -15,7 +15,7 @@ describe ThetvdbMapper::Mapping::Banner do
 
     it 'should call convert method if exists' do
       klass.stub(:respond_to?).with(:convert).and_return(true)
-      klass.should_receive(:convert)
+      klass.should_receive(:convert).and_return({})
       klass.map(sample: 'test')
     end
   end
