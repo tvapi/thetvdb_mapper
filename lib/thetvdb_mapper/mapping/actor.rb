@@ -1,11 +1,19 @@
 class ThetvdbMapper::Mapping::Actor
   def self.map(data)
+    rules.each do |before, after|
+      data[after] = data.delete(before)
+    end
+
+    data
+  end
+
+  def self.rules
     {
-      id: data['id'],
-      image_path: data['Image'],
-      name: data['Name'],
-      role: data['Role'],
-      sort_order: data['SortOrder']
+      'id' => :id,
+      'Image' => :image_path,
+      'Name' => :name,
+      'Role' => :role,
+      'SortOrder' => :sort_order
     }
   end
 end
