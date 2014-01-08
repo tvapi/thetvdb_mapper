@@ -22,6 +22,14 @@ Or install it yourself as:
 
     $ gem install thetvdb_mapper
 
+## Configuration
+
+```ruby
+ThetvdbApi::Configuration.configure do |config|
+  config.api_key = '......'
+end
+```
+
 ## Usage
 
 ```ruby
