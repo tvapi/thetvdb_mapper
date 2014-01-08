@@ -20,11 +20,11 @@ describe ThetvdbMapper::Mapping::Banner do
     end
 
     it 'should map BannerType' do
-      model.rules['BannerType'].should == :type
+      model.rules['BannerType'].should == :kind
     end
 
     it 'should map BannerType2' do
-      model.rules['BannerType2'].should == :type2
+      model.rules['BannerType2'].should == :kind2
     end
 
     it 'should map Language' do

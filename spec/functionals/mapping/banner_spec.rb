@@ -5,7 +5,7 @@ describe ThetvdbMapper::Mapping::Banner do
 
   describe '#map' do
     it 'should return specific keys' do
-      model.map.keys.sort.should == [:path, :thumbnail_path, :vignette_path, :type, :type2, :language, :season,
+      model.map.keys.sort.should == [:path, :thumbnail_path, :vignette_path, :kind, :kind2, :language, :season,
         :rating, :rating_count, :series_name, :colors, :id].sort
     end
 
@@ -31,12 +31,12 @@ describe ThetvdbMapper::Mapping::Banner do
 
     it 'should map BannerType' do
       model.stub(:data).and_return('BannerType' => 'test')
-      model.map[:type].should == 'test'
+      model.map[:kind].should == 'test'
     end
 
     it 'should map BannerType2' do
       model.stub(:data).and_return('BannerType2' => 'test')
-      model.map[:type2].should == 'test'
+      model.map[:kind2].should == 'test'
     end
 
     it 'should map Language' do
