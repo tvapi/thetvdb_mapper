@@ -1,5 +1,5 @@
 class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
-  def self.rules
+  def rules
     {
       'id' => :id,
       'Combined_episodenumber' => :combined_episode_number,
@@ -34,7 +34,7 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
     }
   end
 
-  def self.convert(data)
+  def convert
     data.merge({
       director: convert_to_list(data[:director]),
       guest_stars: convert_to_list(data[:guest_stars]),

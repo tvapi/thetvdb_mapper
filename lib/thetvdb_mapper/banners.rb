@@ -4,10 +4,14 @@ class ThetvdbMapper::Banners < ThetvdbMapper::Base
   end
 
   def map(data)
-    ThetvdbMapper::Mapping::Banner.map(data)
+    mapping_object(data).map
   end
 
   def inspect
     "<ThetvdbMapper::Banners data=#{data.to_s} >"
+  end
+
+  def mapping_object(data)
+    ThetvdbMapper::Mapping::Banner.new(data)
   end
 end

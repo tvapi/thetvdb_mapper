@@ -5,7 +5,6 @@ describe ThetvdbMapper::Episode do
 
   describe '.data' do
     it 'should return array' do
-      puts model.data.inspect
       model.data.class.should == Hash
     end
   end

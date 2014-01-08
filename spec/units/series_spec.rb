@@ -9,7 +9,8 @@ describe ThetvdbMapper::Series do
     end
 
     it 'should call map on mapping class' do
-      ThetvdbMapper::Mapping::Series.should_receive(:map).with(sample: true)
+      model.stub(:mapping_object).and_return(double(map: true))
+      model.mapping_object(sample: true).should_receive(:map)
       model.data
     end
   end
@@ -21,6 +22,12 @@ describe ThetvdbMapper::Series do
 
     it 'should return correct string' do
       model.inspect.should == '<ThetvdbMapper::Series data=DATA >'
+    end
+  end
+
+  describe '.mapping_object' do
+    it 'should return mapping episode instance' do
+      model.mapping_object(sample: true).class.should == ThetvdbMapper::Mapping::Series
     end
   end
 end

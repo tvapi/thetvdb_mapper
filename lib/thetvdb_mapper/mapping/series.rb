@@ -1,5 +1,5 @@
 class ThetvdbMapper::Mapping::Series < ThetvdbMapper::Mapping::Base
-  def self.rules
+  def rules
     {
       'id' => :id,
       'Airs_DayOfWeek' => :airs_day_of_week,
@@ -27,7 +27,7 @@ class ThetvdbMapper::Mapping::Series < ThetvdbMapper::Mapping::Base
     }
   end
 
-  def self.convert(data)
+  def convert
     data.merge({
       genres: convert_to_list(data[:genres]),
       last_updated_at: Time.at(data[:last_updated_at].to_i)

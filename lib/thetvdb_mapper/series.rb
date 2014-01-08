@@ -1,6 +1,10 @@
 class ThetvdbMapper::Series < ThetvdbMapper::Base
   def data
-    @data ||= ThetvdbMapper::Mapping::Series.map(fetcher.series(id).body)
+    @data ||= mapping_object(fetcher.series(id).body).map
+  end
+
+  def mapping_object(data)
+    ThetvdbMapper::Mapping::Series.new(data)
   end
 
   def inspect

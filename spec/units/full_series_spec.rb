@@ -38,7 +38,8 @@ describe ThetvdbMapper::FullSeries do
     end
 
     it 'should map series' do
-      ThetvdbMapper::Mapping::Series.should_receive(:map).with(sample: true)
+      model.stub(:mapping_series_object).and_return(double(map: true))
+      model.mapping_series_object(sample: true).should_receive(:map)
       model.series
     end
   end
@@ -56,7 +57,8 @@ describe ThetvdbMapper::FullSeries do
 
   describe '.map_episode' do
     it 'should map episode' do
-      ThetvdbMapper::Mapping::Episode.should_receive(:map).with(sample: true)
+      model.stub(:mapping_episode_object).and_return(double(map: true))
+      model.mapping_episode_object(sample: true).should_receive(:map)
       model.map_episode(sample: true)
     end
   end
@@ -74,7 +76,8 @@ describe ThetvdbMapper::FullSeries do
 
   describe '.map_actor' do
     it 'should map actor' do
-      ThetvdbMapper::Mapping::Actor.should_receive(:map).with(sample: true)
+      model.stub(:mapping_actor_object).and_return(double(map: true))
+      model.mapping_actor_object(sample: true).should_receive(:map)
       model.map_actor(sample: true)
     end
   end
@@ -91,9 +94,37 @@ describe ThetvdbMapper::FullSeries do
   end
 
   describe '.map_banner' do
+    before do
+      model.stub(:mapping_banner_object).with(sample: true).and_return(double(map: true))
+    end
+
     it 'should map banner' do
-      ThetvdbMapper::Mapping::Banner.should_receive(:map).with(sample: true)
+      model.mapping_banner_object(sample: true).should_receive(:map)
       model.map_banner(sample: true)
+    end
+  end
+
+  describe '.mapping_series_object' do
+    it 'should return mapping series instance' do
+      model.mapping_series_object(sample: true).class.should == ThetvdbMapper::Mapping::Series
+    end
+  end
+
+  describe '.mapping_episode_object' do
+    it 'should return mapping episode instance' do
+      model.mapping_episode_object(sample: true).class.should == ThetvdbMapper::Mapping::Episode
+    end
+  end
+
+  describe '.mapping_actor_object' do
+    it 'should return mapping actor instance' do
+      model.mapping_actor_object(sample: true).class.should == ThetvdbMapper::Mapping::Actor
+    end
+  end
+
+  describe '.mapping_banner_object' do
+    it 'should return mapping banner instance' do
+      model.mapping_banner_object(sample: true).class.should == ThetvdbMapper::Mapping::Banner
     end
   end
 

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe ThetvdbMapper::Mapping::Episode do
-  let(:klass) { ThetvdbMapper::Mapping::Episode }
+  let(:model) { ThetvdbMapper::Mapping::Episode.new({}) }
 
   describe '#map' do
     it 'should return specific keys' do
-      klass.map({}).keys.sort.should == [:id, :combined_episode_number, :combined_season, :dvd_episode_number,
+      model.map.keys.sort.should == [:id, :combined_episode_number, :combined_season, :dvd_episode_number,
         :dvd_season, :director, :ep_img_flag, :name, :number, :first_aired, :guest_stars, :imdb_id, :language,
         :overview, :production_code, :rating, :rating_count, :season, :writer, :absolute_number, :airs_after_season,
         :airs_before_episode, :airs_before_season, :filename_path, :last_updated_at, :season_id, :series_id,
@@ -13,123 +13,153 @@ describe ThetvdbMapper::Mapping::Episode do
     end
 
     it 'should map id' do
-      klass.map('id' => 1234)[:id].should == 1234
+      model.stub(:data).and_return('id' => 1234)
+      model.map[:id].should == 1234
     end
 
     it 'should map Combined_episodenumber' do
-      klass.map('Combined_episodenumber' => 1234)[:combined_episode_number].should == 1234
+      model.stub(:data).and_return('Combined_episodenumber' => 1234)
+      model.map[:combined_episode_number].should == 1234
     end
 
     it 'should map Combined_season' do
-      klass.map('Combined_season' => 1234)[:combined_season].should == 1234
+      model.stub(:data).and_return('Combined_season' => 1234)
+      model.map[:combined_season].should == 1234
     end
 
     it 'should map DVD_episodenumber' do
-      klass.map('DVD_episodenumber' => 1234)[:dvd_episode_number].should == 1234
+      model.stub(:data).and_return('DVD_episodenumber' => 1234)
+      model.map[:dvd_episode_number].should == 1234
     end
 
     it 'should map DVD_season' do
-      klass.map('DVD_season' => 1234)[:dvd_season].should == 1234
+      model.stub(:data).and_return('DVD_season' => 1234)
+      model.map[:dvd_season].should == 1234
     end
 
     it 'should map Director' do
-      klass.map('Director' => '|test|')[:director].should == ['test']
+      model.stub(:data).and_return('Director' => '|test|')
+      model.map[:director].should == ['test']
     end
 
     it 'should map EpImgFlag' do
-      klass.map('EpImgFlag' => 1234)[:ep_img_flag].should == 1234
+      model.stub(:data).and_return('EpImgFlag' => 1234)
+      model.map[:ep_img_flag].should == 1234
     end
 
     it 'should map EpisodeName' do
-      klass.map('EpisodeName' => 'test')[:name].should == 'test'
+      model.stub(:data).and_return('EpisodeName' => 'test')
+      model.map[:name].should == 'test'
     end
 
     it 'should map EpisodeNumber' do
-      klass.map('EpisodeNumber' => 1234)[:number].should == 1234
+      model.stub(:data).and_return('EpisodeNumber' => 1234)
+      model.map[:number].should == 1234
     end
 
     it 'should map FirstAired' do
-      klass.map('FirstAired' => 1234)[:first_aired].should == 1234
+      model.stub(:data).and_return('FirstAired' => 1234)
+      model.map[:first_aired].should == 1234
     end
 
     it 'should map GuestStars' do
-      klass.map('GuestStars' => '|test|')[:guest_stars].should == ['test']
+      model.stub(:data).and_return('GuestStars' => '|test|')
+      model.map[:guest_stars].should == ['test']
     end
 
     it 'should map IMDB_ID' do
-      klass.map('IMDB_ID' => 'test')[:imdb_id].should == 'test'
+      model.stub(:data).and_return('IMDB_ID' => 'test')
+      model.map[:imdb_id].should == 'test'
     end
 
     it 'should map Language' do
-      klass.map('Language' => 'test')[:language].should == 'test'
+      model.stub(:data).and_return('Language' => 'test')
+      model.map[:language].should == 'test'
     end
 
     it 'should map Overview' do
-      klass.map('Overview' => 'test')[:overview].should == 'test'
+      model.stub(:data).and_return('Overview' => 'test')
+      model.map[:overview].should == 'test'
     end
 
     it 'should map ProductionCode' do
-      klass.map('ProductionCode' => 'test')[:production_code].should == 'test'
+      model.stub(:data).and_return('ProductionCode' => 'test')
+      model.map[:production_code].should == 'test'
     end
 
     it 'should map Rating' do
-      klass.map('Rating' => '1.0')[:rating].should == '1.0'
+      model.stub(:data).and_return('Rating' => '1.0')
+      model.map[:rating].should == '1.0'
     end
 
     it 'should map RatingCount' do
-      klass.map('RatingCount' => '1')[:rating_count].should == '1'
+      model.stub(:data).and_return('RatingCount' => '1')
+      model.map[:rating_count].should == '1'
     end
 
     it 'should map SeasonNumber' do
-      klass.map('SeasonNumber' => '1')[:season].should == '1'
+      model.stub(:data).and_return('SeasonNumber' => '1')
+      model.map[:season].should == '1'
     end
 
     it 'should map Writer' do
-      klass.map('Writer' => '|test|')[:writer].should == ['test']
+      model.stub(:data).and_return('Writer' => '|test|')
+      model.map[:writer].should == ['test']
     end
 
     it 'should map absolute_number' do
-      klass.map('absolute_number' => '1')[:absolute_number].should == '1'
+      model.stub(:data).and_return('absolute_number' => '1')
+      model.map[:absolute_number].should == '1'
     end
 
     it 'should map airsafter_season' do
-      klass.map('airsafter_season' => '1')[:airs_after_season].should == '1'
+      model.stub(:data).and_return('airsafter_season' => '1')
+      model.map[:airs_after_season].should == '1'
     end
 
     it 'should map airsbefore_episode' do
-      klass.map('airsbefore_episode' => '1')[:airs_before_episode].should == '1'
+      model.stub(:data).and_return('airsbefore_episode' => '1')
+      model.map[:airs_before_episode].should == '1'
     end
 
     it 'should map airsbefore_season' do
-      klass.map('airsbefore_season' => '1')[:airs_before_season].should == '1'
+      model.stub(:data).and_return('airsbefore_season' => '1')
+      model.map[:airs_before_season].should == '1'
     end
 
     it 'should map filename' do
-      klass.map('filename' => 'test')[:filename_path].should == 'test'
+      model.stub(:data).and_return('filename' => 'test')
+      model.map[:filename_path].should == 'test'
     end
 
     it 'should map lastupdated' do
-      klass.map('lastupdated' => '1234')[:last_updated_at].should == Time.at(1234)
+      model.stub(:data).and_return('lastupdated' => '1234')
+      model.map[:last_updated_at].should == Time.at(1234)
     end
 
     it 'should map seasonid' do
-      klass.map('seasonid' => '1')[:season_id].should == '1'
+      model.stub(:data).and_return('seasonid' => '1')
+      model.map[:season_id].should == '1'
     end
 
     it 'should map seriesid' do
-      klass.map('seriesid' => '1')[:series_id].should == '1'
+      model.stub(:data).and_return('seriesid' => '1')
+      model.map[:series_id].should == '1'
     end
 
     it 'should map thumb_added' do
-      klass.map('thumb_added' => 'test')[:thumbnail_added_at].should == 'test'
+      model.stub(:data).and_return('thumb_added' => 'test')
+      model.map[:thumbnail_added_at].should == 'test'
     end
 
     it 'should map thumb_height' do
-      klass.map('thumb_height' => 'test')[:thumbnail_height].should == 'test'
+      model.stub(:data).and_return('thumb_height' => 'test')
+      model.map[:thumbnail_height].should == 'test'
     end
 
     it 'should map thumb_width' do
-      klass.map('thumb_width' => 'test')[:thumbnail_width].should == 'test'
+      model.stub(:data).and_return('thumb_width' => 'test')
+      model.map[:thumbnail_width].should == 'test'
     end
   end
 end

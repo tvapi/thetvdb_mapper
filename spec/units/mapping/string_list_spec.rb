@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe ThetvdbMapper::Mapping::StringList do
-  let(:klass) { ThetvdbMapper::Mapping::StringList }
+  let(:model) { ThetvdbMapper::Mapping::StringList.new('|test|') }
 
   describe '#map' do
     it 'should return array' do
-      klass.map('|test|').should == ['test']
+      model.map.should == ['test']
     end
   end
 end

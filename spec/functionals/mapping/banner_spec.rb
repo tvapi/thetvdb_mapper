@@ -1,60 +1,72 @@
 require 'spec_helper'
 
 describe ThetvdbMapper::Mapping::Banner do
-  let(:klass) { ThetvdbMapper::Mapping::Banner }
+  let(:model) { ThetvdbMapper::Mapping::Banner.new({}) }
 
   describe '#map' do
     it 'should return specific keys' do
-      klass.map({}).keys.sort.should == [:path, :thumbnail_path, :vignette_path, :type, :type2, :language, :season,
+      model.map.keys.sort.should == [:path, :thumbnail_path, :vignette_path, :type, :type2, :language, :season,
         :rating, :rating_count, :series_name, :colors, :id].sort
     end
 
     it 'should map id' do
-      klass.map('id' => '1')[:id].should == '1'
+      model.stub(:data).and_return('id' => '1')
+      model.map[:id].should == '1'
     end
 
     it 'should map BannerPath' do
-      klass.map('BannerPath' => 'test')[:path].should == 'test'
+      model.stub(:data).and_return('BannerPath' => 'test')
+      model.map[:path].should == 'test'
     end
 
     it 'should map ThumbnailPath' do
-      klass.map('ThumbnailPath' => 'test')[:thumbnail_path].should == 'test'
+      model.stub(:data).and_return('ThumbnailPath' => 'test')
+      model.map[:thumbnail_path].should == 'test'
     end
 
     it 'should map VignettePath' do
-      klass.map('VignettePath' => 'test')[:vignette_path].should == 'test'
+      model.stub(:data).and_return('VignettePath' => 'test')
+      model.map[:vignette_path].should == 'test'
     end
 
     it 'should map BannerType' do
-      klass.map('BannerType' => 'test')[:type].should == 'test'
+      model.stub(:data).and_return('BannerType' => 'test')
+      model.map[:type].should == 'test'
     end
 
     it 'should map BannerType2' do
-      klass.map('BannerType2' => 'test')[:type2].should == 'test'
+      model.stub(:data).and_return('BannerType2' => 'test')
+      model.map[:type2].should == 'test'
     end
 
     it 'should map Language' do
-      klass.map('Language' => 'test')[:language].should == 'test'
+      model.stub(:data).and_return('Language' => 'test')
+      model.map[:language].should == 'test'
     end
 
     it 'should map Season' do
-      klass.map('Season' => 'test')[:season].should == 'test'
+      model.stub(:data).and_return('Season' => 'test')
+      model.map[:season].should == 'test'
     end
 
     it 'should map Rating' do
-      klass.map('Rating' => 'test')[:rating].should == 'test'
+      model.stub(:data).and_return('Rating' => 'test')
+      model.map[:rating].should == 'test'
     end
 
     it 'should map RatingCount' do
-      klass.map('RatingCount' => 'test')[:rating_count].should == 'test'
+      model.stub(:data).and_return('RatingCount' => 'test')
+      model.map[:rating_count].should == 'test'
     end
 
     it 'should map SeriesName' do
-      klass.map('SeriesName' => 'test')[:series_name].should == 'test'
+      model.stub(:data).and_return('SeriesName' => 'test')
+      model.map[:series_name].should == 'test'
     end
 
     it 'should map Colors' do
-      klass.map('Colors' => 'test')[:colors].should == 'test'
+      model.stub(:data).and_return('Colors' => 'test')
+      model.map[:colors].should == 'test'
     end
   end
 end

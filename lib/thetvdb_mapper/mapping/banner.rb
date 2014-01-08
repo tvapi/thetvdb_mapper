@@ -1,5 +1,5 @@
 class ThetvdbMapper::Mapping::Banner < ThetvdbMapper::Mapping::Base
-  def self.rules
+  def rules
     {
       'id' => :id,
       'BannerPath' => :path,

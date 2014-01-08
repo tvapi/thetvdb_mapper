@@ -1,5 +1,5 @@
 class ThetvdbMapper::Mapping::Actor < ThetvdbMapper::Mapping::Base
-  def self.rules
+  def rules
     {
       'id' => :id,
       'Image' => :image_path,

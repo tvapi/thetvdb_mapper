@@ -4,10 +4,14 @@ class ThetvdbMapper::Actors < ThetvdbMapper::Base
   end
 
   def map(data)
-    ThetvdbMapper::Mapping::Actor.map(data)
+    mapping_object(data).map
   end
 
   def inspect
     "<ThetvdbMapper::Actors data=#{data.to_s} >"
+  end
+
+  def mapping_object(data)
+    ThetvdbMapper::Mapping::Actor.new(data)
   end
 end

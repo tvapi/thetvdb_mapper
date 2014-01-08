@@ -4,7 +4,7 @@ class ThetvdbMapper::FullSeries < ThetvdbMapper::Base
   end
 
   def series
-    ThetvdbMapper::Mapping::Series.map(fetcher.full_series(id).body['Series'])
+    mapping_series_object(fetcher.full_series(id).body['Series']).map
   end
 
   def episodes
@@ -12,7 +12,7 @@ class ThetvdbMapper::FullSeries < ThetvdbMapper::Base
   end
 
   def map_episode(data)
-    ThetvdbMapper::Mapping::Episode.map(data)
+    mapping_episode_object(data).map
   end
 
   def actors
@@ -20,7 +20,7 @@ class ThetvdbMapper::FullSeries < ThetvdbMapper::Base
   end
 
   def map_actor(data)
-    ThetvdbMapper::Mapping::Actor.map(data)
+    mapping_actor_object(data).map
   end
 
   def banners
@@ -28,7 +28,23 @@ class ThetvdbMapper::FullSeries < ThetvdbMapper::Base
   end
 
   def map_banner(data)
-    ThetvdbMapper::Mapping::Banner.map(data)
+    mapping_banner_object(data).map
+  end
+
+  def mapping_series_object(data)
+    ThetvdbMapper::Mapping::Series.new(data)
+  end
+
+  def mapping_episode_object(data)
+    ThetvdbMapper::Mapping::Episode.new(data)
+  end
+
+  def mapping_actor_object(data)
+    ThetvdbMapper::Mapping::Actor.new(data)
+  end
+
+  def mapping_banner_object(data)
+    ThetvdbMapper::Mapping::Banner.new(data)
   end
 
   def inspect
