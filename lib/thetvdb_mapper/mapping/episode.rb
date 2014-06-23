@@ -6,7 +6,7 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
       'Combined_season' => :combined_season,
       'DVD_episodenumber' => :dvd_episode_number,
       'DVD_season' => :dvd_season,
-      'Director' => :director,
+      'Director' => :directors,
       'EpImgFlag' => :ep_img_flag,
       'EpisodeName' => :name,
       'EpisodeNumber' => :number,
@@ -19,7 +19,7 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
       'Rating' => :rating,
       'RatingCount' => :rating_count,
       'SeasonNumber' => :season,
-      'Writer' => :writer,
+      'Writer' => :writers,
       'absolute_number' => :absolute_number,
       'airsafter_season' => :airs_after_season,
       'airsbefore_episode' => :airs_before_episode,
@@ -36,9 +36,9 @@ class ThetvdbMapper::Mapping::Episode < ThetvdbMapper::Mapping::Base
 
   def convert
     data.merge({
-      director: convert_to_list(data[:director]),
+      directors: convert_to_list(data[:directors]),
       guest_stars: convert_to_list(data[:guest_stars]),
-      writer: convert_to_list(data[:writer]),
+      writers: convert_to_list(data[:writers]),
       last_updated_at: Time.at(data[:last_updated_at].to_i)
     })
   end

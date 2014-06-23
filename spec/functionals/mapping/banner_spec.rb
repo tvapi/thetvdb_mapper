@@ -1,7 +1,40 @@
 require 'spec_helper'
 
 describe ThetvdbMapper::Mapping::Banner do
-  let(:model) { ThetvdbMapper::Mapping::Banner.new({}) }
+  let(:model) { ThetvdbMapper::Mapping::Banner.new(input_data) }
+  let(:input_data) do
+    {
+      'id' => '123',
+      'BannerPath' => '/image_path',
+      'ThumbnailPath' => '/image2_path',
+      'VignettePath' => '/image3_path',
+      'BannerType' => 'kind',
+      'BannerType2' => 'kind2',
+      'Language' => 'en',
+      'Season' => '1',
+      'Rating' => '1.1',
+      'RatingCount' => '123',
+      'SeriesName' => 'Test',
+      'Colors' => 'RGB',
+    }
+  end
+
+  let(:output_data) do
+    {
+      id: '123',
+      path: '/image_path',
+      thumbnail_path: '/image2_path',
+      vignette_path: '/image3_path',
+      kind: 'kind',
+      kind2: 'kind2',
+      language: 'en',
+      season: '1',
+      rating: '1.1',
+      rating_count: '123',
+      series_name: 'Test',
+      colors: 'RGB'
+    }
+  end
 
   describe '#map' do
     it 'should return specific keys' do
@@ -9,64 +42,8 @@ describe ThetvdbMapper::Mapping::Banner do
         :rating, :rating_count, :series_name, :colors, :id].sort
     end
 
-    it 'should map id' do
-      model.stub(:data).and_return('id' => '1')
-      model.map[:id].should == '1'
-    end
-
-    it 'should map BannerPath' do
-      model.stub(:data).and_return('BannerPath' => 'test')
-      model.map[:path].should == 'test'
-    end
-
-    it 'should map ThumbnailPath' do
-      model.stub(:data).and_return('ThumbnailPath' => 'test')
-      model.map[:thumbnail_path].should == 'test'
-    end
-
-    it 'should map VignettePath' do
-      model.stub(:data).and_return('VignettePath' => 'test')
-      model.map[:vignette_path].should == 'test'
-    end
-
-    it 'should map BannerType' do
-      model.stub(:data).and_return('BannerType' => 'test')
-      model.map[:kind].should == 'test'
-    end
-
-    it 'should map BannerType2' do
-      model.stub(:data).and_return('BannerType2' => 'test')
-      model.map[:kind2].should == 'test'
-    end
-
-    it 'should map Language' do
-      model.stub(:data).and_return('Language' => 'test')
-      model.map[:language].should == 'test'
-    end
-
-    it 'should map Season' do
-      model.stub(:data).and_return('Season' => 'test')
-      model.map[:season].should == 'test'
-    end
-
-    it 'should map Rating' do
-      model.stub(:data).and_return('Rating' => 'test')
-      model.map[:rating].should == 'test'
-    end
-
-    it 'should map RatingCount' do
-      model.stub(:data).and_return('RatingCount' => 'test')
-      model.map[:rating_count].should == 'test'
-    end
-
-    it 'should map SeriesName' do
-      model.stub(:data).and_return('SeriesName' => 'test')
-      model.map[:series_name].should == 'test'
-    end
-
-    it 'should map Colors' do
-      model.stub(:data).and_return('Colors' => 'test')
-      model.map[:colors].should == 'test'
+    it 'should return corrected Hash after mapping' do
+      model.map.should == output_data
     end
   end
 end
