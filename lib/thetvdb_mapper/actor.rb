@@ -1,4 +1,4 @@
-class ThetvdbMapper::Mapping::Actor < ThetvdbMapper::Mapping::Base
+class ThetvdbMapper::Actor < ThetvdbMapper::Base
   def rules
     {
       'id' => :id,

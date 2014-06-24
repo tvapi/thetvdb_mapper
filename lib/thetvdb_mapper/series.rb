@@ -1,13 +1,36 @@
 class ThetvdbMapper::Series < ThetvdbMapper::Base
-  def data
-    @data ||= mapping_object(fetcher.series(id).body).map
+  def rules
+    {
+      'id' => :id,
+      'Airs_DayOfWeek' => :airs_day_of_week,
+      'Airs_Time' => :airs_time,
+      'ContentRating' => :content_rating,
+      'FirstAired' => :first_aired,
+      'Genre' => :genres,
+      'IMDB_ID' => :imdb_id,
+      'Language' => :language,
+      'Network' => :network,
+      'NetworkID' => :network_id,
+      'Overview' => :overview,
+      'Rating' => :rating,
+      'RatingCount' => :rating_count,
+      'Runtime' => :runtime,
+      'SeriesName' => :name,
+      'Status' => :status,
+      'added' => :added_at,
+      'addedBy' => :added_by,
+      'banner' => :banner_path,
+      'fanart' => :fanart_path,
+      'lastupdated' => :last_updated_at,
+      'poster' => :poster_path,
+      'zap2it_id' => :zap2it_id
+    }
   end
 
-  def mapping_object(data)
-    ThetvdbMapper::Mapping::Series.new(data)
-  end
-
-  def inspect
-    "<ThetvdbMapper::Series data=#{data.to_s} >"
+  def convert
+    data.merge({
+      genres: convert_to_list(data[:genres]),
+      last_updated_at: Time.at(data[:last_updated_at].to_i)
+    })
   end
 end

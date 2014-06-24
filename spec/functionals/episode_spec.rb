@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe ThetvdbMapper::Mapping::Episode do
-  let(:model) { ThetvdbMapper::Mapping::Episode.new(input_data) }
+describe ThetvdbMapper::Episode do
+  let(:model) { ThetvdbMapper::Episode.new(input_data) }
   let(:input_data) do
     {
       'id' => '123',

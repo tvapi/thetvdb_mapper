@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe ThetvdbMapper::Mapping::Banner do
-  let(:model) { ThetvdbMapper::Mapping::Banner.new(input_data) }
+describe ThetvdbMapper::Banner do
+  let(:model) { ThetvdbMapper::Banner.new(input_data) }
   let(:input_data) do
     {
       'id' => '123',

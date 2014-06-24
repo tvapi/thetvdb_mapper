@@ -1,4 +1,4 @@
-class ThetvdbMapper::Mapping::Banner < ThetvdbMapper::Mapping::Base
+class ThetvdbMapper::Banner < ThetvdbMapper::Base
   def rules
     {
       'id' => :id,

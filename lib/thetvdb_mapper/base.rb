@@ -1,11 +1,27 @@
 class ThetvdbMapper::Base
-  attr_reader :id
+  attr_reader :data
 
-  def initialize(id)
-    @id = id
+  def initialize(data)
+    @data = data
   end
 
-  def fetcher
-    @fetcher ||= ThetvdbMapper::Fetcher.new
+  def map
+    rules.each do |before, after|
+      data[after] = data.delete(before)
+    end
+
+    convert.reject{ |key, _| key.is_a?(String) }
+  end
+
+  def convert
+    data
+  end
+
+  def convert_to_list(data)
+    list_mapping_object(data).map
+  end
+
+  def list_mapping_object(data)
+    ThetvdbMapper::Mapping::StringList.new(data)
   end
 end
