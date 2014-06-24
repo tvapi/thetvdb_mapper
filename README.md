@@ -6,7 +6,7 @@
 
 # ThetvdbMapper
 
-Fetch data from thetvdb.com and mapping to common hash, where keys are symbols and underline.
+ThetvdbMapper mapping and normalizing keys in hash data provided by ThetvdbApi.
 
 ## Installation
 
@@ -22,22 +22,13 @@ Or install it yourself as:
 
     $ gem install thetvdb_mapper
 
-## Configuration
-
-```ruby
-ThetvdbApi::Configuration.configure do |config|
-  config.api_key = '......'
-end
-```
-
 ## Usage
 
 ```ruby
-ThetvdbMapper::Actor.new(series_id).data # return actors
-ThetvdbMapper::Banners.new(series_id).data # return banners hash (not image)
-ThetvdbMapper::Episode.new(episode_id).data # return episode
-ThetvdbMapper::FullSeries.new(series_id).data # return series with all episodes
-ThetvdbMapper::Series.new(series_id).data # return series
+ThetvdbMapper::Actor.new(data)
+ThetvdbMapper::Banners.new(data)
+ThetvdbMapper::Episode.new(data)
+ThetvdbMapper::Series.new(data)
 ```
 
 ## Contributing
