@@ -22,6 +22,6 @@ class ThetvdbMapper::Base
   end
 
   def list_mapping_object(data)
-    ThetvdbMapper::Mapping::StringList.new(data)
+    ThetvdbMapper::StringList.new(data)
   end
 end
