@@ -21,16 +21,16 @@ describe ThetvdbMapper::Banner do
 
   let(:output_data) do
     {
-      id: '123',
+      id: 123,
       path: '/image_path',
       thumbnail_path: '/image2_path',
       vignette_path: '/image3_path',
       kind: 'kind',
       kind2: 'kind2',
       language: 'en',
-      season: '1',
-      rating: '1.1',
-      rating_count: '123',
+      season: 1,
+      rating: 1.1,
+      rating_count: 123,
       series_name: 'Test',
       colors: 'RGB'
     }
@@ -38,12 +38,12 @@ describe ThetvdbMapper::Banner do
 
   describe '#map' do
     it 'should return specific keys' do
-      model.map.keys.sort.should == [:path, :thumbnail_path, :vignette_path, :kind, :kind2, :language, :season,
+      model.keys.sort.should == [:path, :thumbnail_path, :vignette_path, :kind, :kind2, :language, :season,
         :rating, :rating_count, :series_name, :colors, :id].sort
     end
 
     it 'should return corrected Hash after mapping' do
-      model.map.should == output_data
+      model.to_hash.should == output_data
     end
   end
 end
