@@ -31,5 +31,4 @@ class ThetvdbMapper::Episode < ThetvdbMapper::Base
   property :thumbnail_added_at,      from: 'thumb_added',            with: lambda { |value| DateTime.parse(value) }
   property :thumbnail_height,        from: 'thumb_height',           with: lambda { |value| value.to_i }
   property :thumbnail_width,         from: 'thumb_width',            with: lambda { |value| value.to_i }
-
 end
