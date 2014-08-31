@@ -60,13 +60,13 @@ describe ThetvdbMapper::Series do
 
   describe '#map' do
     it 'should return specific keys' do
-      model.keys.sort.should == [:id, :airs_day_of_week, :airs_time, :content_rating, :first_aired, :genres,
+      expect(model.keys.sort).to eq([:id, :airs_day_of_week, :airs_time, :content_rating, :first_aired, :genres,
         :imdb_id, :language, :network, :network_id, :overview, :rating, :rating_count, :runtime, :name, :status,
-        :added_at, :added_by, :banner_path, :fanart_path, :last_updated_at, :poster_path, :zap2it_id].sort
+        :added_at, :added_by, :banner_path, :fanart_path, :last_updated_at, :poster_path, :zap2it_id].sort)
     end
 
     it 'should return corrected Hash after mapping' do
-      model.to_hash.should == output_data
+      expect(model.to_hash).to eq(output_data)
     end
   end
 end

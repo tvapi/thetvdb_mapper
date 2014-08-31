@@ -74,15 +74,15 @@ describe ThetvdbMapper::Episode do
 
   describe '#map' do
     it 'should return specific keys' do
-      model.keys.sort.should == [:id, :combined_episode_number, :combined_season, :dvd_episode_number,
+      expect(model.keys.sort).to eq([:id, :combined_episode_number, :combined_season, :dvd_episode_number,
         :dvd_season, :directors, :ep_img_flag, :name, :number, :first_aired, :guest_stars, :imdb_id, :language,
         :overview, :production_code, :rating, :rating_count, :season, :writers, :absolute_number, :airs_after_season,
         :airs_before_episode, :airs_before_season, :filename_path, :last_updated_at, :season_id, :series_id,
-        :thumbnail_added_at, :thumbnail_height, :thumbnail_width].sort
+        :thumbnail_added_at, :thumbnail_height, :thumbnail_width].sort)
     end
 
     it 'should return corrected Hash after mapping' do
-      model.to_hash.should == output_data
+      expect(model.to_hash).to eq(output_data)
     end
   end
 end

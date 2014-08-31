@@ -38,12 +38,12 @@ describe ThetvdbMapper::Banner do
 
   describe '#map' do
     it 'should return specific keys' do
-      model.keys.sort.should == [:path, :thumbnail_path, :vignette_path, :kind, :kind2, :language, :season,
-        :rating, :rating_count, :series_name, :colors, :id].sort
+      expect(model.keys.sort).to eq([:path, :thumbnail_path, :vignette_path, :kind, :kind2, :language, :season,
+        :rating, :rating_count, :series_name, :colors, :id].sort)
     end
 
     it 'should return corrected Hash after mapping' do
-      model.to_hash.should == output_data
+      expect(model.to_hash).to eq(output_data)
     end
   end
 end

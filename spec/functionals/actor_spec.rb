@@ -24,11 +24,11 @@ describe ThetvdbMapper::Actor do
 
   describe '.map' do
     it 'should return specific keys' do
-      model.keys.sort.should == [:id, :image_path, :name, :role, :sort_order].sort
+      expect(model.keys.sort).to eq([:id, :image_path, :name, :role, :sort_order].sort)
     end
 
     it 'should return corrected Hash after mapping' do
-      model.to_hash.should == output_data
+      expect(model.to_hash).to eq(output_data)
     end
   end
 end
