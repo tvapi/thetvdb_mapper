@@ -1,8 +1,6 @@
 require 'hashie'
 
-module ThetvdbMapper
-  module Mapping; end
-end
+module ThetvdbMapper; end
 
 require 'thetvdb_mapper/version'
 require 'thetvdb_mapper/base'
