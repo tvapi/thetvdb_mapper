@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/wafcio/thetvdb_mapper.png?branch=master)](https://travis-ci.org/wafcio/thetvdb_mapper)
-[![Dependency Status](https://gemnasium.com/wafcio/thetvdb_mapper.png)](https://gemnasium.com/wafcio/thetvdb_mapper)
-[![Code Climate](https://codeclimate.com/github/wafcio/thetvdb_mapper.png)](https://codeclimate.com/github/wafcio/thetvdb_mapper)
-[![Coverage Status](https://coveralls.io/repos/wafcio/thetvdb_mapper/badge.png)](https://coveralls.io/r/wafcio/thetvdb_mapper)
+[![Build Status](https://travis-ci.org/tvapi/thetvdb_mapper.png?branch=master)](https://travis-ci.org/tvapi/thetvdb_mapper)
+[![Dependency Status](https://gemnasium.com/tvapi/thetvdb_mapper.png)](https://gemnasium.com/tvapi/thetvdb_mapper)
+[![Code Climate](https://codeclimate.com/github/tvapi/thetvdb_mapper.png)](https://codeclimate.com/github/tvapi/thetvdb_mapper)
+[![Coverage Status](https://coveralls.io/repos/tvapi/thetvdb_mapper/badge.png)](https://coveralls.io/r/tvapi/thetvdb_mapper)
 [![Gem Version](https://badge.fury.io/rb/thetvdb_mapper.png)](http://badge.fury.io/rb/thetvdb_mapper)
 
 # ThetvdbMapper
