@@ -1,49 +1,38 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ThetvdbMapper::Banner do
-  let(:model) { ThetvdbMapper::Banner.new(input_data) }
-  let(:input_data) do
-    {
-      'id' => '123',
-      'BannerPath' => '/image_path',
-      'ThumbnailPath' => '/image2_path',
-      'VignettePath' => '/image3_path',
-      'BannerType' => 'kind',
-      'BannerType2' => 'kind2',
-      'Language' => 'en',
-      'Season' => '1',
-      'Rating' => '1.1',
-      'RatingCount' => '123',
-      'SeriesName' => 'Test',
-      'Colors' => 'RGB',
-    }
-  end
+  let(:model) { ThetvdbMapper::Banner.build }
+  let(:input_data) { MultiXml.parse(File.read("spec/fixtures/banners.xml")) }
 
   let(:output_data) do
     {
-      id: 123,
-      path: '/image_path',
-      thumbnail_path: '/image2_path',
-      vignette_path: '/image3_path',
-      kind: 'kind',
-      kind2: 'kind2',
-      language: 'en',
-      season: 1,
-      rating: 1.1,
-      rating_count: 123,
-      series_name: 'Test',
-      colors: 'RGB'
+      "id" => 899538,
+      "language" => "en",
+      "path" => "fanart/original/80348-55.jpg",
+      "rating" => 8.5,
+      "rating_count" => 2,
+      "season" => 0,
+      "series_name" => true,
+      "thumbnail_path" => "_cache/fanart/original/80348-55.jpg",
+      "type" => "fanart",
+      "type2" => "1280x720",
+      "vignette_path" => "fanart/vignette/80348-55.jpg",
+      "colors" => "|172,157,124|184,131,113|53,53,51|"
     }
   end
 
-  describe '#map' do
-    it 'should return specific keys' do
-      expect(model.keys.sort).to eq([:path, :thumbnail_path, :vignette_path, :kind, :kind2, :language, :season,
-        :rating, :rating_count, :series_name, :colors, :id].sort)
+  describe "#call" do
+    let(:result) { model.call(input_data["Banners"]["Banner"]) }
+
+    it "returns specific keys" do
+      expect(result[0].keys).
+        to match_array(
+             %w(id path type type2 colors language rating rating_count series_name thumbnail_path vignette_path season)
+           )
     end
 
-    it 'should return corrected Hash after mapping' do
-      expect(model.to_hash).to eq(output_data)
+    it "returns corrected Hash after mapping" do
+      expect(result[0]).to eq(output_data)
     end
   end
 end

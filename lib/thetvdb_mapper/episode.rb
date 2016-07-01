@@ -1,34 +1,61 @@
-class ThetvdbMapper::Episode < ThetvdbMapper::Base
-  property :id,                      from: 'id',                     with: lambda { |value| value.to_i }
-  property :combined_episode_number, from: 'Combined_episodenumber', with: lambda { |value| value.to_f }
-  property :combined_season,         from: 'Combined_season',        with: lambda { |value| value.to_f }
-  property :dvd_chapter,             from: 'DVD_chapter'
-  property :dvd_disc_id,             from: 'DVD_discid'
-  property :dvd_episode_number,      from: 'DVD_episodenumber',      with: lambda { |value| value.to_f }
-  property :dvd_season,              from: 'DVD_season',             with: lambda { |value| value.to_i }
-  property :directors,               from: 'Director',               with: lambda { |value| to_array(value) }
-  property :ep_img_flag,             from: 'EpImgFlag',              with: lambda { |value| value.to_i }
-  property :name,                    from: 'EpisodeName'
-  property :number,                  from: 'EpisodeNumber',          with: lambda { |value| value.to_i }
-  property :first_aired,             from: 'FirstAired',             with: lambda { |value| Date.parse(value) }
-  property :guest_stars,             from: 'GuestStars',             with: lambda { |value| to_array(value) }
-  property :imdb_id,                 from: 'IMDB_ID'
-  property :language,                from: 'Language'
-  property :overview,                from: 'Overview'
-  property :production_code,         from: 'ProductionCode'
-  property :rating,                  from: 'Rating',                 with: lambda { |value| value.to_f }
-  property :rating_count,            from: 'RatingCount',            with: lambda { |value| value.to_i }
-  property :season,                  from: 'SeasonNumber',           with: lambda { |value| value.to_i }
-  property :writers,                 from: 'Writer',                 with: lambda { |value| to_array(value) }
-  property :absolute_number,         from: 'absolute_number',        with: lambda { |value| value.to_i }
-  property :airs_after_season,       from: 'airsafter_season',       with: lambda { |value| value.to_i }
-  property :airs_before_episode,     from: 'airsbefore_episode',     with: lambda { |value| value.to_i }
-  property :airs_before_season,      from: 'airsbefore_season',      with: lambda { |value| value.to_i }
-  property :filename_path,           from: 'filename'
-  property :last_updated_at,         from: 'lastupdated',            with: lambda { |value| Time.at(value.to_i) }
-  property :season_id,               from: 'seasonid'
-  property :series_id,               from: 'seriesid'
-  property :thumbnail_added_at,      from: 'thumb_added',            with: lambda { |value| DateTime.parse(value) }
-  property :thumbnail_height,        from: 'thumb_height',           with: lambda { |value| value.to_i }
-  property :thumbnail_width,         from: 'thumb_width',            with: lambda { |value| value.to_i }
+# class ThetvdbMapper::Episode < ThetvdbMapper::Base
+#   property :thumbnail_added_at,      from: 'thumb_added',            with: lambda { |value| DateTime.parse(value) }
+#   property :thumbnail_height,        from: 'thumb_height',           with: lambda { |value| value.to_i }
+#   property :thumbnail_width,         from: 'thumb_width',            with: lambda { |value| value.to_i }
+# end
+
+class ThetvdbMapper::Episode < ROM::Mapper
+  attribute "id", type: :integer
+  attribute "combined_episode_number", from: "Combined_episodenumber", type: :float
+  attribute "combined_season", from: "Combined_season", type: :float
+  attribute "dvd_chapter", from: "DVD_chapter"
+  attribute "dvd_disc_id", from: "DVD_discid"
+  attribute "dvd_episode_number", from: "DVD_episodenumber", type: :float
+  attribute "dvd_season", from: "DVD_season", type: :integer
+  attribute "ep_img_flag", from: "EpImgFlag", type: :integer
+  attribute "name", from: "EpisodeName"
+  attribute "number", from: "EpisodeNumber", type: :integer
+  attribute "imdb_id", from: "IMDB_ID"
+  attribute "language", from: "Language"
+  attribute "overview", from: "Overview"
+  attribute "production_code", from: "ProductionCode"
+  attribute "rating", from: "Rating", type: :float
+  attribute "rating_count", from: "RatingCount", type: :integer
+  attribute "season_number", from: "SeasonNumber", type: :integer
+  attribute "absolute_number", from: "absolute_number", type: :integer
+  attribute "airs_after_season", from: "airsafter_season", type: :integer
+  attribute "airs_before_episode", from: "airsbefore_episode", type: :integer
+  attribute "airs_before_season", from: "airsbefore_season", type: :integer
+  attribute "filename_path", from: "filename"
+  attribute "season_id", from: "seasonid", type: :integer
+  attribute "series_id", from: "seriesid", type: :integer
+  attribute "flagged", from: "flagged", type: :integer
+  attribute "mirror_updated_at", from: "mirrorupdate", type: :time
+  attribute "tms_export", type: :integer
+  attribute "thumbnail_height", from: "thumb_height", type: :integer
+  attribute "thumbnail_width", from: "thumb_width", type: :integer
+
+  attribute "thumbnail_added_at", from: "thumb_added" do |attr|
+    attr ? DateTime.parse(attr) : nil
+  end
+
+  attribute "first_aired", from: "FirstAired" do |attr|
+    attr ? Date.parse(attr) : nil
+  end
+
+  attribute "last_updated_at", from: "lastupdated" do |attr|
+    attr ? Time.at(attr.to_i) : nil
+  end
+
+  attribute "directors", from: "Director" do |attr|
+    attr.to_s.split("|").reject{ |element| element.empty? }
+  end
+
+  attribute "guest_stars", from: "GuestStars" do |attr|
+    attr.to_s.split("|").reject{ |element| element.empty? }
+  end
+
+  attribute "writers", from: "Writer" do |attr|
+    attr.to_s.split("|").reject{ |element| element.empty? }
+  end
 end

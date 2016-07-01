@@ -1,72 +1,58 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ThetvdbMapper::Series do
-  let(:model) { ThetvdbMapper::Series.new(input_data) }
-  let(:input_data) do
-    {
-      'id' => '123',
-      'Airs_DayOfWeek' => 'Monday',
-      'Airs_Time' => '8 AM',
-      'ContentRating' => 'PG',
-      'FirstAired' => '2000-01-01',
-      'Genre' => 'sci-fi',
-      'IMDB_ID' => 'tt000000',
-      'Language' => 'en',
-      'Network' => 'SyFy',
-      'NetworkID' => '1',
-      'Overview' => 'overview',
-      'Rating' => '1.1',
-      'RatingCount' => '123',
-      'Runtime' => '60',
-      'SeriesName' => 'Test',
-      'Status' => 'continue',
-      'added' => '2000-01-01 01:00:00',
-      'addedBy' => 'test',
-      'banner' => 'banner_path',
-      'fanart' => 'fanart_path',
-      'lastupdated' => 1,
-      'poster' => 'poster_path',
-      'zap2it_id' => 'zap123'
-    }
-  end
+  let(:model) { ThetvdbMapper::Series.build }
+  let(:input_data) { MultiXml.parse(File.read("spec/fixtures/series.xml")) }
 
   let(:output_data) do
     {
-      id: 123,
-      airs_day_of_week: 'Monday',
-      airs_time: '8 AM',
-      content_rating: 'PG',
-      first_aired: Date.parse('2000-01-01'),
-      genres: ['sci-fi'],
-      imdb_id: 'tt000000',
-      language: 'en',
-      network: 'SyFy',
-      network_id: 1,
-      overview: 'overview',
-      rating: 1.1,
-      rating_count: 123,
-      runtime: 60,
-      name: 'Test',
-      status: 'continue',
-      added_at: DateTime.parse('2000-01-01 01:00:00'),
-      added_by: 'test',
-      banner_path: 'banner_path',
-      fanart_path: 'fanart_path',
-      last_updated_at: Time.at(1),
-      poster_path: 'poster_path',
-      zap2it_id: 'zap123'
+      "id" => 80348,
+      "actors" => ["Zachary Levi", "Yvonne Strahovski", "Joshua Gomez", "Adam Baldwin", "Bonita Friedericy",
+                   "Julia Ling", "Vik Sahay", "Ryan McPartlin", "Scott Krinsky", "Mark Christopher Lawrence",
+                   "Sarah Lancaster", "Mekenna Melvin", "Linda Hamilton", "Brandon Routh", "Matthew Bomer"],
+      "airs_day_of_week" => "Friday",
+      "airs_time" => "8:00 PM",
+      "content_rating" => "TV-PG",
+      "first_aired" => Date.parse("2007-09-24"),
+      "genres" => ["Action", "Adventure", "Comedy", "Drama"],
+      "imdb_id" => "tt0934814",
+      "language" => "en",
+      "network" => "NBC",
+      "network_id" => 0,
+      "overview" => "Chuck Bartowski, ace computer geek at Buy More, is not in his right mind. That's a good thing. "\
+                    "Ever since he unwittingly downloaded stolen government secrets into his brain, action, "\
+                    "excitement and a cool secret-agent girlfriend have entered his life. It's a bad thing, too. "\
+                    "Because now Chuck is in danger 24/7.",
+      "rating" => 8.7,
+      "rating_count" => 855,
+      "runtime" => 60,
+      "name" => "Chuck",
+      "series_id" => 68724,
+      "status" => "Ended",
+      "added_at" => nil,
+      "added_by" => nil,
+      "banner_path" => "graphical/80348-g26.jpg",
+      "fanart_path" => "fanart/original/80348-32.jpg",
+      "poster_path" => "posters/80348-16.jpg",
+      "last_updated_at" => Time.at(1388829637),
+      "zap2it_id" => "EP00930779"
     }
   end
 
-  describe '#map' do
-    it 'should return specific keys' do
-      expect(model.keys.sort).to eq([:id, :airs_day_of_week, :airs_time, :content_rating, :first_aired, :genres,
-        :imdb_id, :language, :network, :network_id, :overview, :rating, :rating_count, :runtime, :name, :status,
-        :added_at, :added_by, :banner_path, :fanart_path, :last_updated_at, :poster_path, :zap2it_id].sort)
+  describe "#call" do
+    let(:result) { model.call([input_data["Data"]["Series"]]) }
+
+    it "returns specific keys" do
+      expect(result[0].keys).
+        to match_array(
+             %w(actors added_at added_by airs_day_of_week airs_time banner_path content_rating fanart_path first_aired
+                genres id imdb_id language last_updated_at name network network_id overview poster_path rating
+                rating_count runtime series_id status zap2it_id)
+           )
     end
 
-    it 'should return corrected Hash after mapping' do
-      expect(model.to_hash).to eq(output_data)
+    it "returns corrected Hash after mapping" do
+      expect(result[0]).to eq(output_data)
     end
   end
 end

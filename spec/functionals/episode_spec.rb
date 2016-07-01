@@ -1,88 +1,68 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ThetvdbMapper::Episode do
-  let(:model) { ThetvdbMapper::Episode.new(input_data) }
-  let(:input_data) do
-    {
-      'id' => '123',
-      'Combined_episodenumber' => 1,
-      'Combined_season' => 2,
-      'DVD_episodenumber' => 3,
-      'DVD_season' => 4,
-      'Director' => 'McG',
-      'EpImgFlag' => 1,
-      'EpisodeName' => 'Test',
-      'EpisodeNumber' => 5,
-      'FirstAired' => '2000-01-01',
-      'GuestStars' => 'Mieko Hillman|Kristine Blackport',
-      'IMDB_ID' => 'tt000000',
-      'Language' => 'en',
-      'Overview' => 'overview',
-      'ProductionCode' => '1234',
-      'Rating' => '1.1',
-      'RatingCount' => '12',
-      'SeasonNumber' => '1',
-      'Writer' => 'McG',
-      'absolute_number' => '1',
-      'airsafter_season' => '1',
-      'airsbefore_episode' => '1',
-      'airsbefore_season' => '1',
-      'filename' => '/path',
-      'lastupdated' => 1,
-      'seasonid' => '1',
-      'seriesid' => '1',
-      'thumb_added' => '2000-01-01 01:00:00',
-      'thumb_height' => '100',
-      'thumb_width' => '100'
-    }
-  end
+  let(:model) { ThetvdbMapper::Episode.build }
+  let(:input_data) { MultiXml.parse(File.read("spec/fixtures/episode.xml")) }
 
   let(:output_data) do
     {
-      id: 123,
-      combined_episode_number: 1.0,
-      combined_season: 2.0,
-      dvd_episode_number: 3.0,
-      dvd_season: 4,
-      directors: ['McG'],
-      ep_img_flag: 1,
-      name: 'Test',
-      number: 5,
-      first_aired: Date.parse('2000-01-01'),
-      guest_stars: ['Mieko Hillman', 'Kristine Blackport'],
-      imdb_id: 'tt000000',
-      language: 'en',
-      overview: 'overview',
-      production_code: '1234',
-      rating: 1.1,
-      rating_count: 12,
-      season: 1,
-      writers: ['McG'],
-      absolute_number: 1,
-      airs_after_season: 1,
-      airs_before_episode: 1,
-      airs_before_season: 1,
-      filename_path: '/path',
-      last_updated_at: Time.at(1),
-      season_id: '1',
-      series_id: '1',
-      thumbnail_added_at: DateTime.parse('2000-01-01 01:00:00'),
-      thumbnail_height: 100,
-      thumbnail_width: 100
+      "id" => 332179,
+      "combined_episode_number" => 0.0,
+      "combined_season" => 0.0,
+      "dvd_chapter" => nil,
+      "dvd_disc_id" => nil,
+      "dvd_episode_number" => 1.0,
+      "dvd_season" => 1,
+      "directors" => ["McG"],
+      "ep_img_flag" => 0,
+      "name" => "Chuck Versus the Intersect",
+      "number" => 1,
+      "first_aired" => Date.parse("2007-09-24"),
+      "guest_stars" => ["Mieko Hillman", "Kristine Blackport", "Jim Pirri", "Diana Gitelman", "Mel Fair",
+                        "Lynn A. Henderson", "Odessa Rae", "Jordan Potter", "Tasha Campbell", "Dale Dye",
+                        "Matthew Bomer", "Bruno Amato", "Nicolas Pajon", "Wendy Makkena"],
+      "imdb_id" => "tt1035912",
+      "language" => "en",
+      "overview" => "Chuck Bartowski is an average computer geek until files of government secrets are downloaded "\
+                    "into his brain. He is soon scouted by the CIA and NSA to act in place of their computer.",
+      "production_code" => "276025",
+      "rating" => 7.7,
+      "rating_count" => 0,
+      "season_number" => 1,
+      "writers" => ["Josh Schwartz", "Chris Fedak"],
+      "absolute_number" => 1,
+      "airs_after_season" => 0,
+      "airs_before_episode" => 0,
+      "airs_before_season" => 0,
+      "filename_path" => "episodes/80348/332179.jpg",
+      "last_updated_at" => Time.at(1286047470),
+      "season_id" => 27985,
+      "series_id" => 80348,
+      "flagged" => 0,
+      "mirror_updated_at" => Time.parse("2013-10-08 13:25:36"),
+      "tms_export" => 1,
+      "thumbnail_added_at" => nil,
+      "thumbnail_height" => 225,
+      "thumbnail_width" => 400
     }
   end
 
-  describe '#map' do
-    it 'should return specific keys' do
-      expect(model.keys.sort).to eq([:id, :combined_episode_number, :combined_season, :dvd_episode_number,
-        :dvd_season, :directors, :ep_img_flag, :name, :number, :first_aired, :guest_stars, :imdb_id, :language,
-        :overview, :production_code, :rating, :rating_count, :season, :writers, :absolute_number, :airs_after_season,
-        :airs_before_episode, :airs_before_season, :filename_path, :last_updated_at, :season_id, :series_id,
-        :thumbnail_added_at, :thumbnail_height, :thumbnail_width].sort)
+  describe "#call" do
+    let(:result) { model.call([input_data["Data"]["Episode"]]) }
+
+    it "returns specific keys" do
+      expect(result[0].keys).
+        to match_array(
+             %w(absolute_number airs_after_season airs_before_episode airs_before_season combined_episode_number
+                combined_season directors dvd_chapter dvd_disc_id dvd_episode_number dvd_season ep_img_flag
+                filename_path first_aired flagged guest_stars id imdb_id language last_updated_at mirror_updated_at
+                name number overview production_code rating rating_count season_id season_number series_id
+                thumbnail_added_at thumbnail_height thumbnail_width tms_export writers)
+           )
     end
 
-    it 'should return corrected Hash after mapping' do
-      expect(model.to_hash).to eq(output_data)
+    it "returns corrected Hash after mapping" do
+      expect(result[0]).to eq(output_data)
     end
   end
 end

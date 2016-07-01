@@ -1,7 +1,7 @@
-class ThetvdbMapper::Actor < ThetvdbMapper::Base
-  property :id,         from: 'id',        with: lambda { |value| value.to_i }
-  property :image_path, from: 'Image'
-  property :name,       from: 'Name'
-  property :role,       from: 'Role'
-  property :sort_order, from: 'SortOrder', with: lambda { |value| value.to_i }
+class ThetvdbMapper::Actor < ROM::Mapper
+  attribute "id", type: :integer
+  attribute "image_path", from: "Image"
+  attribute "name", from: "Name"
+  attribute "role", from: "Role"
+  attribute "sort_order", from: "SortOrder", type: :integer
 end
